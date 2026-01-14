@@ -60,25 +60,30 @@ export function getListings(): Listing[] {
         entry[header] = values[index] ?? "";
       });
 
-      return {
-        id: entry.id,
-        slug: entry.slug,
-        title: entry.title,
-        city: entry.city as Listing["city"],
-        country: entry.country,
-        type: entry.type as Listing["type"],
-        priceEur: Number(entry.priceEur),
-        utilitiesMinEur: entry.utilitiesMinEur ? Number(entry.utilitiesMinEur) : undefined,
-        utilitiesMaxEur: entry.utilitiesMaxEur ? Number(entry.utilitiesMaxEur) : undefined,
-        district: entry.district,
-        address: entry.address,
-        bedrooms: entry.bedrooms ? Number(entry.bedrooms) : undefined,
-        livingRoom: entry.livingRoom === "true",
-        sizeSqm: entry.sizeSqm ? Number(entry.sizeSqm) : undefined,
-        amenities: splitSemicolon(entry.amenities),
-        images: splitSemicolon(entry.images),
-        createdAt: entry.createdAt || new Date().toISOString(),
-      };
+  const folder = entry.imageFolder ? entry.imageFolder.replace(/\\/g, "/") : "";
+  const basePath = folder ? folder.replace(/\/$/, "") : "";
+
+  return {
+    id: entry.id,
+    slug: entry.slug,
+    title: entry.title,
+    city: entry.city as Listing["city"],
+    country: entry.country,
+    type: entry.type as Listing["type"],
+    priceEur: Number(entry.priceEur),
+    utilitiesMinEur: entry.utilitiesMinEur ? Number(entry.utilitiesMinEur) : undefined,
+    utilitiesMaxEur: entry.utilitiesMaxEur ? Number(entry.utilitiesMaxEur) : undefined,
+    district: entry.district,
+    address: entry.address,
+    bedrooms: entry.bedrooms ? Number(entry.bedrooms) : undefined,
+    livingRoom: entry.livingRoom === "true",
+    sizeSqm: entry.sizeSqm ? Number(entry.sizeSqm) : undefined,
+    amenities: splitSemicolon(entry.amenities),
+    images: splitSemicolon(entry.images).map((image) =>
+      image.startsWith("/") ? image : basePath ? `/${basePath}/${image}` : `/${image}`
+    ),
+    createdAt: entry.createdAt || new Date().toISOString(),
+  };
     });
 
   return cache;
