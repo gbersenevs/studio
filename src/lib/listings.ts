@@ -70,42 +70,6 @@ function formatImages(entry: Record<string, string>): string[] {
     return ["/placeholder/studio.jpg"];
   }
 
-  return files.map((file) => `/${normalized}/${file}`);
-}
-
-function deriveImagePaths(entry: Record<string, string>) {
-  const explicit = splitSemicolon(entry.images);
-  if (explicit.length) {
-    return explicit;
-  }
-
-  const folder =
-    entry["Appartment folder"] ||
-    entry["Apartment folder"] ||
-    entry["imageFolder"] ||
-    entry.imageFolder ||
-    "";
-
-  if (!folder) {
-    return ["/placeholder/studio.jpg"];
-  }
-
-  const normalized = folder.replace(/\\/g, "/").replace(/^\/+|\/+$/g, "");
-  const folderPath = path.join(process.cwd(), "data", normalized);
-
-  if (!fs.existsSync(folderPath)) {
-    return ["/placeholder/studio.jpg"];
-  }
-
-  const files = fs
-    .readdirSync(folderPath)
-    .filter((file) => /\.(jpe?g|png|webp)$/i.test(file))
-    .sort();
-
-  if (!files.length) {
-    return ["/placeholder/studio.jpg"];
-  }
-
   return files.map((file) => `/api/images/${encodeURIComponent(normalized)}/${encodeURIComponent(file)}`);
 }
 
