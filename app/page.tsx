@@ -10,31 +10,31 @@ import { listings } from "@/src/data/listings";
 import { testimonials } from "@/src/data/testimonials";
 
 const offerItems = [
-  "Rooms and apartments with clear pricing and utilities noted.",
-  "Riga and Palanga locations managed by one owner, no agencies.",
-  "Student friendly communication by email, WhatsApp, or Telegram.",
-  "Flexible viewing options including remote walkthroughs.",
+  "Rooms and apartments with clear pricing and noted utilities.",
+  "Riga and Palanga locations managed directly by one owner.",
+  "Contact by email, WhatsApp, or Telegram. No agencies.",
+  "Viewings in person or remote, with simple next steps.",
 ];
 
 const values = [
   {
-    title: "Direct and clear",
-    description: "One owner for all listings, straightforward terms, no hidden steps.",
+    title: "Transparency",
+    description: "Straightforward terms and expectations from the first message.",
     icon: <MessageSquare className="w-5 h-5" />,
   },
   {
-    title: "Student friendly",
-    description: "We answer quickly and adapt to student schedules and timelines.",
+    title: "Responsiveness",
+    description: "Quick replies and clear timing, even for international students.",
     icon: <Sparkles className="w-5 h-5" />,
   },
   {
-    title: "Safe handover",
-    description: "Transparent contracts and move-in checklists so nothing is missed.",
+    title: "Respect for students",
+    description: "Calm communication, no pressure, and honest details.",
     icon: <KeyRound className="w-5 h-5" />,
   },
   {
-    title: "Two cities",
-    description: "Riga, Latvia and Palanga, Lithuania with the same point of contact.",
+    title: "Well maintained",
+    description: "Spaces kept in good order with one accountable owner.",
     icon: <Home className="w-5 h-5" />,
   },
 ];
@@ -67,17 +67,17 @@ export default function HomePage() {
         <Container className="py-16 md:py-20 lg:py-24 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
           <div className="space-y-6">
             <div className="inline-flex items-center gap-2 rounded-full bg-white px-4 py-2 shadow-soft border border-border/70 text-sm text-text-muted">
-              Student housing company • Riga and Palanga
+              JuoStudio • Owner-managed housing
             </div>
             <div className="space-y-3">
               <p className="text-sm uppercase tracking-[0.2em] text-text-light">
-                Company name
+                JuoStudio
               </p>
               <h1 className="text-4xl md:text-5xl font-semibold text-text leading-tight">
                 Student apartments and rooms in Riga, Latvia and Palanga, Lithuania
               </h1>
               <p className="text-lg text-text-muted">
-                All listings are owned and managed by one owner. Student friendly communication and clear terms.
+                All listings are owned and managed by one owner. Clear communication and simple steps to move in.
               </p>
             </div>
             <div className="flex flex-wrap gap-3">
@@ -114,7 +114,7 @@ export default function HomePage() {
       <Section>
         <SectionHeader
           title="What we offer"
-          subtitle="Listings are presented with clear pricing, utilities, and communication options."
+          subtitle="Listings show pricing, utilities, and contact options up front."
           centered
         />
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4 max-w-4xl mx-auto">
@@ -178,7 +178,7 @@ export default function HomePage() {
       <Section id="reviews">
         <SectionHeader
           title="Reviews"
-          subtitle="These are placeholder testimonials while we collect fresh student feedback."
+          subtitle="Placeholder student feedback to show how we communicate."
           centered
         />
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
@@ -196,9 +196,9 @@ export default function HomePage() {
               subtitle="Pick a channel and we will respond with available slots and next steps."
             />
             <div className="space-y-3 text-sm text-text-muted">
-              <ContactLine label="Email" value="hello@student-housing.example" />
+              <ContactLine label="Email" value="hello@juostudio.example" />
               <ContactLine label="WhatsApp" value="+000 0000 0000" />
-              <ContactLine label="Telegram" value="@studenthousing" />
+              <ContactLine label="Telegram" value="@juostudio" />
             </div>
           </div>
           <div className="rounded-2xl border border-border/70 bg-white p-6 shadow-soft space-y-4">

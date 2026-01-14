@@ -1,17 +1,17 @@
 export const siteConfig = {
   company: {
-    name: "Company name",
-    descriptor: "Student housing company",
-    email: "hello@student-housing.example",
+    name: "JuoStudio",
+    descriptor: "Owner-managed student housing",
+    email: "hello@juostudio.example",
     whatsapp: "+000 0000 0000",
-    telegram: "@studenthousing",
+    telegram: "@juostudio",
     cities: ["Riga, Latvia", "Palanga, Lithuania"],
   },
   seo: {
-    siteName: "Company name",
-    defaultTitle: "Student housing in Riga and Palanga",
+    siteName: "JuoStudio",
+    defaultTitle: "JuoStudio student housing in Riga and Palanga",
     defaultDescription:
-      "Student apartments and rooms in Riga, Latvia and Palanga, Lithuania managed by one owner.",
+      "Student apartments and rooms in Riga, Latvia and Palanga, Lithuania, managed directly by one owner.",
     locale: "en",
     type: "website",
   },

@@ -1,6 +1,6 @@
-# Student Housing MVP
+# JuoStudio Student Housing MVP
 
-Next.js App Router site for a student housing company covering Riga, Latvia and Palanga, Lithuania. All listings are managed by one owner and use placeholder data ready for a future Telegram bot integration.
+Next.js App Router site for JuoStudio, an owner-managed student housing brand covering Riga, Latvia and Palanga, Lithuania. All listings are managed by one owner and use placeholder data ready for a future Telegram bot integration.
 
 ## Tech Stack
 

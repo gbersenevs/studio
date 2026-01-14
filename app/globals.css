@@ -5,20 +5,20 @@
 @tailwind utilities;
 
 :root {
-  --color-primary: #4FB691;
-  --color-primary-50: #F2FAF7;
-  --color-primary-100: #D9F0E7;
-  --color-primary-200: #B6E1D1;
-  --color-primary-600: #3D9F7D;
-  --color-primary-700: #2F8266;
-  --color-secondary: #A4D6C2;
-  --color-tertiary: #F3F7F4;
-  --color-surface: #F8FBF9;
-  --color-background: #FFFFFF;
-  --color-text: #1F2A3D;
-  --color-text-muted: #5A6475;
-  --color-text-light: #8A93A3;
-  --color-border: #E2E7EC;
+  --color-primary: #E6B17E;
+  --color-primary-50: #FFF8F1;
+  --color-primary-100: #FCEFE2;
+  --color-primary-200: #F6DFC5;
+  --color-primary-600: #D49863;
+  --color-primary-700: #B67A4B;
+  --color-secondary: #F3E3D3;
+  --color-tertiary: #FAF6F1;
+  --color-surface: #FFFCF7;
+  --color-background: #FFFEFC;
+  --color-text: #1F252D;
+  --color-text-muted: #5B616B;
+  --color-text-light: #8B9099;
+  --color-border: #E8E2D9;
 }
 
 @layer base {
@@ -91,12 +91,12 @@
     @apply transition-all duration-300 hover:shadow-soft hover:-translate-y-1;
   }
 
-  /* Gradient text - pale green accent */
+  /* Gradient text - warm pastel accent */
   .text-gradient {
     @apply bg-gradient-to-r from-secondary to-primary bg-clip-text text-transparent;
   }
 
-  /* CTA styles with soft green primary */
+  /* CTA styles with soft orange primary */
   .btn-primary {
     @apply bg-primary text-white px-6 py-3 rounded-lg font-medium 
            hover:bg-primary-600 transition-all duration-200 
