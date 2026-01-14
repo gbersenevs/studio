@@ -1,0 +1,13 @@
+<svg width="512" height="512" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="title">
+  <title>Student housing placeholder icon</title>
+  <defs>
+    <linearGradient id="g" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#D9F0E7"/>
+      <stop offset="100%" stop-color="#4FB691"/>
+    </linearGradient>
+  </defs>
+  <rect width="512" height="512" rx="96" fill="url(#g)"/>
+  <path d="M128 272l128-96 128 96v112H320v-80h-64v80H128V272z" fill="#ffffff" opacity="0.92"/>
+  <circle cx="176" cy="320" r="16" fill="#4FB691"/>
+  <circle cx="336" cy="320" r="16" fill="#4FB691"/>
+</svg>

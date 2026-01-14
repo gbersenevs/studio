@@ -1,0 +1,11 @@
+<svg width="64" height="64" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="title">
+  <title>Student housing favicon</title>
+  <defs>
+    <linearGradient id="gfav" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#D9F0E7"/>
+      <stop offset="100%" stop-color="#4FB691"/>
+    </linearGradient>
+  </defs>
+  <rect width="512" height="512" rx="120" fill="url(#gfav)"/>
+  <path d="M136 276l120-86 120 86v100h-72v-68h-96v68h-72V276z" fill="#ffffff" opacity="0.94"/>
+</svg>
