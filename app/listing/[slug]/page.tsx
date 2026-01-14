@@ -1,10 +1,10 @@
 import { Metadata } from "next";
 import { notFound } from "next/navigation";
-import Image from "next/image";
 import Link from "next/link";
 import { CTAButton } from "@/components/cta-button";
 import { Container } from "@/components/container";
 import { getListings } from "@/src/lib/listings";
+import { ImageGallery } from "@/components/image-gallery";
 
 type Props = {
   params: { slug: string };
@@ -46,34 +46,7 @@ export default function ListingPage({ params }: Props) {
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
         <div className="lg:col-span-2 space-y-4">
-          <div className="relative aspect-[4/3] overflow-hidden rounded-3xl border border-border/70 shadow-soft">
-            <Image
-              src={listing!.images[0]}
-              alt={listing!.title}
-              fill
-              className="object-cover"
-              sizes="(max-width: 1024px) 100vw, 900px"
-            />
-            <div className="absolute left-4 bottom-4 rounded-full bg-white/85 px-4 py-2 text-xs font-medium text-text shadow-soft">
-              Photos and some details are placeholders.
-            </div>
-          </div>
-          <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
-            {listing!.images.slice(1).map((image, index) => (
-              <div
-                key={index}
-                className="relative aspect-[4/3] overflow-hidden rounded-2xl border border-border/60"
-              >
-                <Image
-                  src={image}
-                  alt={`${listing!.title} ${index + 2}`}
-                  fill
-                  className="object-cover"
-                  sizes="(max-width: 1024px) 50vw, 300px"
-                />
-              </div>
-            ))}
-          </div>
+          <ImageGallery images={listing!.images} />
         </div>
 
         <div className="space-y-4 rounded-3xl border border-border/70 bg-white p-6 shadow-soft">

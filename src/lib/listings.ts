@@ -40,6 +40,39 @@ function splitSemicolon(value = "") {
     .filter(Boolean);
 }
 
+function formatImages(entry: Record<string, string>): string[] {
+  const override = splitSemicolon(entry.images);
+  if (override.length) return override;
+
+  const folder =
+    entry["Appartment folder"] ||
+    entry["Apartment folder"] ||
+    entry["imageFolder"] ||
+    entry.imageFolder ||
+    "";
+  const normalized = folder.replace(/\\/g, "/").replace(/^\/+|\/+$/g, "");
+
+  if (!normalized) {
+    return ["/placeholder/studio.jpg"];
+  }
+
+  const folderPath = path.join(process.cwd(), "data", normalized);
+  if (!fs.existsSync(folderPath)) {
+    return ["/placeholder/studio.jpg"];
+  }
+
+  const files = fs
+    .readdirSync(folderPath)
+    .filter((file) => /\.(jpe?g|png|webp)$/i.test(file))
+    .sort();
+
+  if (!files.length) {
+    return ["/placeholder/studio.jpg"];
+  }
+
+  return files.map((file) => `/${normalized}/${file}`);
+}
+
 function deriveImagePaths(entry: Record<string, string>) {
   const explicit = splitSemicolon(entry.images);
   if (explicit.length) {
@@ -112,7 +145,7 @@ export function getListings(): Listing[] {
         livingRoom: entry.livingRoom === "true",
         sizeSqm: entry.sizeSqm ? Number(entry.sizeSqm) : undefined,
         amenities: splitSemicolon(entry.amenities),
-        images: deriveImagePaths(entry),
+        images: formatImages(entry),
         createdAt: entry.createdAt || new Date().toISOString(),
       };
     });
