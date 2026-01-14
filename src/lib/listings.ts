@@ -40,6 +40,42 @@ function splitSemicolon(value = "") {
     .filter(Boolean);
 }
 
+function deriveImagePaths(entry: Record<string, string>) {
+  const explicit = splitSemicolon(entry.images);
+  if (explicit.length) {
+    return explicit;
+  }
+
+  const folder =
+    entry["Appartment folder"] ||
+    entry["Apartment folder"] ||
+    entry["imageFolder"] ||
+    entry.imageFolder ||
+    "";
+
+  if (!folder) {
+    return ["/placeholder/studio.jpg"];
+  }
+
+  const normalized = folder.replace(/\\/g, "/").replace(/^\/+|\/+$/g, "");
+  const folderPath = path.join(process.cwd(), "data", normalized);
+
+  if (!fs.existsSync(folderPath)) {
+    return ["/placeholder/studio.jpg"];
+  }
+
+  const files = fs
+    .readdirSync(folderPath)
+    .filter((file) => /\.(jpe?g|png|webp)$/i.test(file))
+    .sort();
+
+  if (!files.length) {
+    return ["/placeholder/studio.jpg"];
+  }
+
+  return files.map((file) => `/api/images/${encodeURIComponent(normalized)}/${encodeURIComponent(file)}`);
+}
+
 export function getListings(): Listing[] {
   if (cache) {
     return cache;
@@ -60,30 +96,25 @@ export function getListings(): Listing[] {
         entry[header] = values[index] ?? "";
       });
 
-  const folder = entry.imageFolder ? entry.imageFolder.replace(/\\/g, "/") : "";
-  const basePath = folder ? folder.replace(/\/$/, "") : "";
-
-  return {
-    id: entry.id,
-    slug: entry.slug,
-    title: entry.title,
-    city: entry.city as Listing["city"],
-    country: entry.country,
-    type: entry.type as Listing["type"],
-    priceEur: Number(entry.priceEur),
-    utilitiesMinEur: entry.utilitiesMinEur ? Number(entry.utilitiesMinEur) : undefined,
-    utilitiesMaxEur: entry.utilitiesMaxEur ? Number(entry.utilitiesMaxEur) : undefined,
-    district: entry.district,
-    address: entry.address,
-    bedrooms: entry.bedrooms ? Number(entry.bedrooms) : undefined,
-    livingRoom: entry.livingRoom === "true",
-    sizeSqm: entry.sizeSqm ? Number(entry.sizeSqm) : undefined,
-    amenities: splitSemicolon(entry.amenities),
-    images: splitSemicolon(entry.images).map((image) =>
-      image.startsWith("/") ? image : basePath ? `/${basePath}/${image}` : `/${image}`
-    ),
-    createdAt: entry.createdAt || new Date().toISOString(),
-  };
+      return {
+        id: entry.id,
+        slug: entry.slug,
+        title: entry.title,
+        city: entry.city as Listing["city"],
+        country: entry.country,
+        type: entry.type as Listing["type"],
+        priceEur: Number(entry.priceEur),
+        utilitiesMinEur: entry.utilitiesMinEur ? Number(entry.utilitiesMinEur) : undefined,
+        utilitiesMaxEur: entry.utilitiesMaxEur ? Number(entry.utilitiesMaxEur) : undefined,
+        district: entry.district,
+        address: entry.address,
+        bedrooms: entry.bedrooms ? Number(entry.bedrooms) : undefined,
+        livingRoom: entry.livingRoom === "true",
+        sizeSqm: entry.sizeSqm ? Number(entry.sizeSqm) : undefined,
+        amenities: splitSemicolon(entry.amenities),
+        images: deriveImagePaths(entry),
+        createdAt: entry.createdAt || new Date().toISOString(),
+      };
     });
 
   return cache;
