@@ -1,6 +1,7 @@
 "use client";
 
-import { useActionState, useEffect } from "react";
+import { useEffect } from "react";
+import { useActionState } from "next/dist/client/components/action-hook";
 import { CheckCircle2, Loader2 } from "lucide-react";
 import { submitLead, LeadFormState } from "@/app/request/actions";
 import { cn } from "@/lib/utils";
