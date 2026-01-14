@@ -2,7 +2,7 @@ import { Metadata } from "next";
 import { Container } from "@/components/container";
 import { ListingCard } from "@/components/listing-card";
 import { FiltersSidebar } from "@/components/filters-sidebar";
-import { listings } from "@/src/data/listings";
+import { getListings } from "@/src/lib/listings";
 import { Listing } from "@/src/types/listing";
 
 export const metadata: Metadata = {
@@ -104,12 +104,13 @@ function filterAndSort(data: Listing[], filters: FilterState) {
 
 export default function ListingsPage({ searchParams }: { searchParams: SearchParams }) {
   const filters = parseFilters(searchParams);
-  const districts = Array.from(new Set(listings.map((l) => l.district)));
+  const allListings = getListings();
+  const districts = Array.from(new Set(allListings.map((l) => l.district)));
   const amenityOptions = Array.from(
-    new Set(listings.flatMap((l) => l.amenities))
+    new Set(allListings.flatMap((l) => l.amenities))
   ).sort();
 
-  const results = filterAndSort(listings, filters);
+  const results = filterAndSort(allListings, filters);
 
   return (
     <Container className="py-14">

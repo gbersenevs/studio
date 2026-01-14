@@ -4,14 +4,14 @@ import Image from "next/image";
 import Link from "next/link";
 import { CTAButton } from "@/components/cta-button";
 import { Container } from "@/components/container";
-import { listings } from "@/src/data/listings";
+import { getListings } from "@/src/lib/listings";
 
 type Props = {
   params: { slug: string };
 };
 
 export function generateMetadata({ params }: Props): Metadata {
-  const listing = listings.find((item) => item.slug === params.slug);
+  const listing = getListings().find((item) => item.slug === params.slug);
   if (!listing) {
     return {
       title: "Listing not found",
@@ -26,7 +26,7 @@ export function generateMetadata({ params }: Props): Metadata {
 }
 
 export default function ListingPage({ params }: Props) {
-  const listing = listings.find((item) => item.slug === params.slug);
+  const listing = getListings().find((item) => item.slug === params.slug);
 
   if (!listing) {
     notFound();

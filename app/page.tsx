@@ -6,7 +6,7 @@ import { ListingCard } from "@/components/listing-card";
 import { StepCard } from "@/components/step-card";
 import { TestimonialCard } from "@/components/testimonial-card";
 import { ValueCard } from "@/components/value-card";
-import { listings } from "@/src/data/listings";
+import { getListings } from "@/src/lib/listings";
 import { testimonials } from "@/src/data/testimonials";
 
 const offerItems = [
@@ -59,7 +59,7 @@ const steps = [
 ];
 
 export default function HomePage() {
-  const previewListings = listings.slice(0, 2);
+  const previewListings = getListings().slice(0, 2);
 
   return (
     <>
