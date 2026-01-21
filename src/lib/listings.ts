@@ -52,6 +52,13 @@ function parseBoolean(value?: string) {
   return ["1", "true", "yes"].includes(normalized);
 }
 
+function slugify(value: string) {
+  return value
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/(^-|-$)+/g, "");
+}
+
 function formatImages(entry: Record<string, string>): string[] {
   const override = splitSemicolon(entry.images);
   if (override.length) return override;
@@ -105,9 +112,12 @@ export function getListings(): Listing[] {
         entry[header] = values[index] ?? "";
       });
 
+      const generatedSlug = entry.slug || slugify(entry.title || "");
+      const finalSlug = generatedSlug || `${entry["Appartment folder"] || "listing"}-${Date.now()}`;
+
       return {
-        id: entry.id,
-        slug: entry.slug,
+        id: entry.id || finalSlug,
+        slug: finalSlug,
         title: entry.title,
         city: entry.city,
         country: entry.country,
