@@ -102,7 +102,17 @@ function formatImages(entry: Record<string, string>): string[] {
     return [DEFAULT_IMAGE];
   }
 
-  return files.map((file) => `/api/images/${encodeURIComponent(normalized)}/${encodeURIComponent(file)}`);
+  const preferred =
+    files.find((file) => /^0?1\./i.test(file)) ||
+    files.find((file) => /^0?2\./i.test(file));
+
+  const orderedFiles = preferred
+    ? [preferred, ...files.filter((file) => file !== preferred)]
+    : files;
+
+  return orderedFiles.map(
+    (file) => `/api/images/${encodeURIComponent(normalized)}/${encodeURIComponent(file)}`
+  );
 }
 
 export function getListings(): Listing[] {

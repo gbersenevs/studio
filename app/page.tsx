@@ -67,11 +67,11 @@ export default function HomePage() {
         <Container className="py-16 md:py-20 lg:py-24 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
           <div className="space-y-6">
             <div className="inline-flex items-center gap-2 rounded-full bg-white px-4 py-2 shadow-soft border border-border/70 text-sm text-text-muted">
-              JuoStudio • Owner-managed housing
+              SmartHome • Owner-managed housing
             </div>
             <div className="space-y-3">
               <p className="text-sm uppercase tracking-[0.2em] text-text-light">
-                JuoStudio
+                SmartHome
               </p>
               <h1 className="text-4xl md:text-5xl font-semibold text-text leading-tight">
                 Student apartments and rooms in Riga, Latvia and Palanga, Lithuania
