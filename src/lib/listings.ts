@@ -91,7 +91,12 @@ function formatImages(entry: Record<string, string>): string[] {
   const files = fs
     .readdirSync(folderPath)
     .filter((file) => /\.(jpe?g|png|webp|heic)$/i.test(file))
-    .sort((a, b) => a.localeCompare(b, undefined, { numeric: true }));
+    .sort((a, b) => {
+      const numA = Number((a.match(/\d+/) || [])[0] ?? Number.POSITIVE_INFINITY);
+      const numB = Number((b.match(/\d+/) || [])[0] ?? Number.POSITIVE_INFINITY);
+      if (numA !== numB) return numA - numB;
+      return a.localeCompare(b, undefined, { numeric: true });
+    });
 
   if (!files.length) {
     return [DEFAULT_IMAGE];
