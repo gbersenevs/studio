@@ -47,9 +47,9 @@ export default function ListingPage({ params }: Props) {
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
         <div className="lg:col-span-2 space-y-4">
           <ImageGallery images={listing!.images} />
-          {listing?.detailedLongDescription && (
+          {(listing?.detailedLongDescription || listing?.longDescription) && (
             <p className="mt-6 rounded-2xl border border-border/60 bg-white/80 p-4 text-sm leading-relaxed text-text-muted">
-              {listing.detailedLongDescription}
+              {listing.detailedLongDescription || listing.longDescription}
             </p>
           )}
         </div>
@@ -61,10 +61,15 @@ export default function ListingPage({ params }: Props) {
                 {listing!.city}
               </p>
               <h1 className="text-2xl font-semibold text-text">{listing!.title}</h1>
-              <p className="text-sm text-text-muted">
-                {listing!.district}
-                {listing?.address ? ` • ${listing.address}` : ""}
-              </p>
+            <p className="text-sm text-text-muted">
+              {listing!.district}
+              {listing?.address ? ` • ${listing.address}` : ""}
+            </p>
+            {listing.viewType && (
+              <span className="mt-2 inline-flex rounded-full bg-primary/10 px-3 py-1 text-xs text-primary">
+                {listing.viewType}
+              </span>
+            )}
             </div>
             <span className="rounded-full bg-primary/10 px-3 py-1 text-xs font-semibold text-primary capitalize">
               {listing!.type}

@@ -59,11 +59,19 @@ function slugify(value: string) {
     .replace(/(^-|-$)+/g, "");
 }
 
+const DEFAULT_IMAGE =
+  "data:image/svg+xml;utf8," +
+  encodeURIComponent(
+    "<svg xmlns='http://www.w3.org/2000/svg' width='1200' height='900'><rect width='100%' height='100%' fill='#f7f1ea'/><text x='50%' y='50%' fill='#b7a58c' font-family='Arial' font-size='36' text-anchor='middle' dominant-baseline='middle'>Listing image</text></svg>"
+  );
+
 function formatImages(entry: Record<string, string>): string[] {
   const override = splitSemicolon(entry.images);
   if (override.length) return override;
 
   const folder =
+    entry["Appartment_folder"] ||
+    entry["Apartment_folder"] ||
     entry["Appartment folder"] ||
     entry["Apartment folder"] ||
     entry["imageFolder"] ||
@@ -72,12 +80,12 @@ function formatImages(entry: Record<string, string>): string[] {
   const normalized = folder.replace(/\\/g, "/").replace(/^\/+|\/+$/g, "");
 
   if (!normalized) {
-    return ["/placeholder/studio.jpg"];
+    return [DEFAULT_IMAGE];
   }
 
   const folderPath = path.join(process.cwd(), "data", normalized);
   if (!fs.existsSync(folderPath)) {
-    return ["/placeholder/studio.jpg"];
+    return [DEFAULT_IMAGE];
   }
 
   const files = fs
@@ -86,7 +94,7 @@ function formatImages(entry: Record<string, string>): string[] {
     .sort((a, b) => a.localeCompare(b, undefined, { numeric: true }));
 
   if (!files.length) {
-    return ["/placeholder/studio.jpg"];
+    return [DEFAULT_IMAGE];
   }
 
   return files.map((file) => `/api/images/${encodeURIComponent(normalized)}/${encodeURIComponent(file)}`);
@@ -113,7 +121,9 @@ export function getListings(): Listing[] {
       });
 
       const generatedSlug = entry.slug || slugify(entry.title || "");
-      const finalSlug = generatedSlug || `${entry["Appartment folder"] || "listing"}-${Date.now()}`;
+      const finalSlug =
+        generatedSlug ||
+        `${entry["Appartment_folder"] || entry["Appartment folder"] || "listing"}-${Date.now()}`;
 
       return {
         id: entry.id || finalSlug,
@@ -132,6 +142,9 @@ export function getListings(): Listing[] {
         bedrooms: parseNumber(entry.bedrooms),
         livingRoom: parseBoolean(entry.livingRoom),
         sizeSqm: parseNumber(entry.sizeSqm),
+        viewType: entry.View_type || entry.view_type || entry.viewType,
+        longDescription: entry.Long_description?.trim(),
+        detailedLongDescription: entry.Detailed_long_description?.trim(),
         amenities: splitSemicolon(entry.amenities),
         images: formatImages(entry),
         createdAt: entry.createdAt || new Date().toISOString(),
