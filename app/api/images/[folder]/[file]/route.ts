@@ -7,6 +7,7 @@ const MIME_MAP: Record<string, string> = {
   ".jpeg": "image/jpeg",
   ".png": "image/png",
   ".webp": "image/webp",
+  ".heic": "image/heic",
 };
 
 export async function GET(_request: Request, { params }: { params: { folder: string; file: string } }) {

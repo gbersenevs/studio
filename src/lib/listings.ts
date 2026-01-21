@@ -82,8 +82,8 @@ function formatImages(entry: Record<string, string>): string[] {
 
   const files = fs
     .readdirSync(folderPath)
-    .filter((file) => /\.(jpe?g|png|webp)$/i.test(file))
-    .sort();
+    .filter((file) => /\.(jpe?g|png|webp|heic)$/i.test(file))
+    .sort((a, b) => a.localeCompare(b, undefined, { numeric: true }));
 
   if (!files.length) {
     return ["/placeholder/studio.jpg"];

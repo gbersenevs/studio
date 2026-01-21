@@ -47,6 +47,11 @@ export default function ListingPage({ params }: Props) {
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
         <div className="lg:col-span-2 space-y-4">
           <ImageGallery images={listing!.images} />
+          {listing?.detailedLongDescription && (
+            <p className="mt-6 rounded-2xl border border-border/60 bg-white/80 p-4 text-sm leading-relaxed text-text-muted">
+              {listing.detailedLongDescription}
+            </p>
+          )}
         </div>
 
         <div className="space-y-4 rounded-3xl border border-border/70 bg-white p-6 shadow-soft">
