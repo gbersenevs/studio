@@ -102,12 +102,13 @@ function formatImages(entry: Record<string, string>): string[] {
     return [DEFAULT_IMAGE];
   }
 
-  const preferred =
+  const preview =
+    files.find((file) => /^preview\./i.test(file)) ||
     files.find((file) => /^0?1\./i.test(file)) ||
     files.find((file) => /^0?2\./i.test(file));
 
-  const orderedFiles = preferred
-    ? [preferred, ...files.filter((file) => file !== preferred)]
+  const orderedFiles = preview
+    ? [preview, ...files.filter((file) => file !== preview)]
     : files;
 
   return orderedFiles.map(
