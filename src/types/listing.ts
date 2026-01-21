@@ -1,15 +1,13 @@
-export type ListingCity = "Riga" | "Palanga";
-
-export type ListingType = "room" | "apartment";
-
 export interface Listing {
   id: string;
   slug: string;
   title: string;
-  city: ListingCity;
+  city: string;
   country: string;
-  type: ListingType;
+  type: string;
   priceEur: number;
+  autumnPriceEur?: number;
+  springPriceEur?: number;
   utilitiesMinEur?: number;
   utilitiesMaxEur?: number;
   district: string;
@@ -17,6 +15,9 @@ export interface Listing {
   bedrooms?: number;
   livingRoom: boolean;
   sizeSqm?: number;
+  viewType?: string;
+  longDescription?: string;
+  detailedLongDescription?: string;
   amenities: string[];
   images: string[];
   createdAt: string; // ISO string

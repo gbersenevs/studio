@@ -40,6 +40,18 @@ function splitSemicolon(value = "") {
     .filter(Boolean);
 }
 
+function parseNumber(value?: string) {
+  if (!value) return undefined;
+  const parsed = Number(value);
+  return Number.isFinite(parsed) ? parsed : undefined;
+}
+
+function parseBoolean(value?: string) {
+  if (!value) return false;
+  const normalized = value.trim().toLowerCase();
+  return ["1", "true", "yes"].includes(normalized);
+}
+
 function formatImages(entry: Record<string, string>): string[] {
   const override = splitSemicolon(entry.images);
   if (override.length) return override;
@@ -97,17 +109,19 @@ export function getListings(): Listing[] {
         id: entry.id,
         slug: entry.slug,
         title: entry.title,
-        city: entry.city as Listing["city"],
+        city: entry.city,
         country: entry.country,
-        type: entry.type as Listing["type"],
-        priceEur: Number(entry.priceEur),
-        utilitiesMinEur: entry.utilitiesMinEur ? Number(entry.utilitiesMinEur) : undefined,
-        utilitiesMaxEur: entry.utilitiesMaxEur ? Number(entry.utilitiesMaxEur) : undefined,
+        type: entry.type,
+        priceEur: parseNumber(entry.priceEur) ?? 0,
+        autumnPriceEur: parseNumber(entry.autumn_price),
+        springPriceEur: parseNumber(entry.spring_price),
+        utilitiesMinEur: parseNumber(entry.utilitiesMinEur),
+        utilitiesMaxEur: parseNumber(entry.utilitiesMaxEur),
         district: entry.district,
         address: entry.address,
-        bedrooms: entry.bedrooms ? Number(entry.bedrooms) : undefined,
-        livingRoom: entry.livingRoom === "true",
-        sizeSqm: entry.sizeSqm ? Number(entry.sizeSqm) : undefined,
+        bedrooms: parseNumber(entry.bedrooms),
+        livingRoom: parseBoolean(entry.livingRoom),
+        sizeSqm: parseNumber(entry.sizeSqm),
         amenities: splitSemicolon(entry.amenities),
         images: formatImages(entry),
         createdAt: entry.createdAt || new Date().toISOString(),
