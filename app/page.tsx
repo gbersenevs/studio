@@ -144,9 +144,11 @@ export default function HomePage() {
       <Section>
         <SectionHeader
           title="Listings preview"
-          subtitle="These are placeholder listings. Details will be updated before move-in dates."
           centered
         />
+        <div className="flex justify-center mb-6">
+          <CTAButton label="View listings" href="/listings" variant="ghost" />
+        </div>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           {previewListings.map((listing) => (
             <ListingCard key={listing.id} listing={listing} />
