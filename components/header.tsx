@@ -22,7 +22,7 @@ export function Header() {
             aria-label={`${company.name} Home`}
           >
             <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-primary/10 text-primary font-semibold">
-              JS
+              SH
             </div>
             <div className="leading-tight">
               <p className="font-semibold text-text">{company.name}</p>

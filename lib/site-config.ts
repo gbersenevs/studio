@@ -2,9 +2,9 @@ export const siteConfig = {
   company: {
     name: "SmartHome",
     descriptor: "Owner-managed student housing",
-    email: "hello@juostudio.example",
+    email: "hello@smarthome.example",
     whatsapp: "+000 0000 0000",
-    telegram: "@juostudio",
+    telegram: "@smarthome",
     cities: ["Riga, Latvia", "Palanga, Lithuania"],
   },
   seo: {

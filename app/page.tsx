@@ -99,13 +99,10 @@ export default function HomePage() {
             <div className="absolute inset-0 bg-primary/10 blur-3xl rounded-full" />
             <div className="relative overflow-hidden rounded-3xl border border-border/70 bg-white shadow-2xl">
               <img
-                src="https://images.unsplash.com/photo-1505691938895-1758d7feb511?w=1400&auto=format&fit=crop&q=80"
-                alt="Bright student apartment interior"
+                src="https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?w=1400&auto=format&fit=crop&q=80"
+                alt="Student-friendly studio interior"
                 className="w-full h-full object-cover"
               />
-              <div className="absolute left-4 bottom-4 rounded-full bg-white/90 px-4 py-2 text-sm font-medium text-text shadow-soft">
-                Placeholder imagery - final photos coming soon
-              </div>
             </div>
           </div>
         </Container>
@@ -196,9 +193,9 @@ export default function HomePage() {
               subtitle="Pick a channel and we will respond with available slots and next steps."
             />
             <div className="space-y-3 text-sm text-text-muted">
-              <ContactLine label="Email" value="hello@juostudio.example" />
+              <ContactLine label="Email" value="hello@smarthome.example" />
               <ContactLine label="WhatsApp" value="+000 0000 0000" />
-              <ContactLine label="Telegram" value="@juostudio" />
+              <ContactLine label="Telegram" value="@smarthome" />
             </div>
           </div>
           <div className="rounded-2xl border border-border/70 bg-white p-6 shadow-soft space-y-4">
